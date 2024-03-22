@@ -1,3 +1,4 @@
 # Usage
 
-Put the input file in the ./input_files/ directory and run ```npm start```
+Simply edit the `config.json` file to configure the parser.
+After editing the configuration file, you can run the parser by executing `npm start`.

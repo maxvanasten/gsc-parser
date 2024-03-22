@@ -23,7 +23,7 @@ export const GSC_TOKENS_OBJ = {
 
     comma: createToken({ name: "Comma", pattern: /,/ }),
 
-    string_token: createToken({ name: "String", pattern: /["]{1}[.]*["]/ }),
+    string: createToken({ name: "StringToken", pattern: /["]{1}[.]*["]/ }),
 
     identifier: createToken({ name: "Identifier", pattern: /[a-zA-Z0-9_/s]+/ })
 };

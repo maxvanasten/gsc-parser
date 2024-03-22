@@ -26,13 +26,6 @@ export default class GSC_PARSER extends CstParser {
         this.RULE("FunctionDeclaration", () => {
             this.CONSUME(GSC_TOKENS_OBJ.identifier);
             this.CONSUME(GSC_TOKENS_OBJ.lparentheses);
-            this.MANY_SEP({
-                SEP: GSC_TOKENS_OBJ.comma,
-                DEF: () => {
-                    this.CONSUME2(GSC_TOKENS_OBJ.identifier);
-
-                }
-            });
             this.CONSUME(GSC_TOKENS_OBJ.rparentheses);
             this.CONSUME(GSC_TOKENS_OBJ.lbracket);
             this.SUBRULE(this.BlockStatement);
@@ -54,23 +47,13 @@ export default class GSC_PARSER extends CstParser {
         this.RULE("FunctionCall", () => {
             this.CONSUME(GSC_TOKENS_OBJ.identifier);
             this.CONSUME(GSC_TOKENS_OBJ.lparentheses);
-            this.MANY_SEP({
-                SEP: GSC_TOKENS_OBJ.comma,
-                DEF: () => {
-                    this.OR(
-                        { ALT: () => { this.SUBRULE(this.String) } }
-                    );
-                }
-            });
             this.CONSUME(GSC_TOKENS_OBJ.rparentheses);
             this.CONSUME(GSC_TOKENS_OBJ.terminator);
         });
 
         this.RULE("String", () => {
-            this.CONSUME(GSC_TOKENS_OBJ.string_token);
+            this.CONSUME(GSC_TOKENS_OBJ.string);
         });
-
-
 
         this.performSelfAnalysis();
     }

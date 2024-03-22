@@ -73,7 +73,14 @@ class CustomVisitor extends visitor {
             type: "FUNCTION_CALL"
         }
     }
-    
+
+    String(ctx) {
+        return {
+            type: "STRING",
+            content: ctx.StringToken[0].image
+        }
+    }
+
 }
 const GSC_VISITOR = new CustomVisitor();
 export default GSC_VISITOR;
