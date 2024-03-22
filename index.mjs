@@ -1,6 +1,6 @@
-import Parser from "./parser.mjs";
-import { lexer } from "./tokens.mjs";
-import { visitor } from "./visitor.mjs";
+import Parser from "./components/parser.mjs";
+import { lexer } from "./components/tokens.mjs";
+import { visitor } from "./components/visitor.mjs";
 
 // Spawn parser
 const parser = new Parser([], { outputCst: true });
