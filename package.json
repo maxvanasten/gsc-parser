@@ -1,0 +1,19 @@
+{
+  "name": "gsc-parser",
+  "version": "0.0.1",
+  "description": "A GSC parser that returns an Abstract Syntax Tree",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node index.mjs",
+    "start:dev": "nodemon index.mjs"
+  },
+  "keywords": [],
+  "author": "Max van Asten",
+  "license": "ISC",
+  "dependencies": {
+    "chevrotain": "^11.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
