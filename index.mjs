@@ -1,21 +1,25 @@
-import GSC_PARSER from "./parser.mjs";
-import { GSC_LEXER } from "./tokens.mjs";
-import GSC_VISITOR from "./visitor.mjs";
+import Parser from "./parser.mjs";
+import { lexer } from "./tokens.mjs";
+import { visitor } from "./visitor.mjs";
 
-const parser = new GSC_PARSER([], { outputCst: true });
+// Spawn parser
+const parser = new Parser([], { outputCst: true });
 
 function toAst(text) {
-    const lexing_result = GSC_LEXER.tokenize(text);
+    // Get tokens from text
+    const lexing_result = lexer.tokenize(text);
     parser.input = lexing_result.tokens;
 
+    // Parse text to a Concrete Syntax Tree
     const cst = parser.File();
 
     if (parser.errors.length) {
         const ERROR = `Error message: ${parser.errors[0].message}\n\nOn line: ${parser.errors[0].token.startLine}\n\n`;
         console.error(ERROR);
     }
-
-    return GSC_VISITOR.visit(cst);
+    
+    // Parse Concrete Syntax Tree to Abstract Syntax Tree
+    return visitor.visit(cst);
 }
 
 import fs from 'fs';

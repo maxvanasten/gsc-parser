@@ -1,6 +1,6 @@
 import { createToken, Lexer } from "chevrotain";
 
-export const GSC_TOKENS_OBJ = {
+export const tokens = {
     whitespace: createToken({
         name: "Whitespace",
         pattern: /\s+/,
@@ -28,10 +28,4 @@ export const GSC_TOKENS_OBJ = {
     identifier: createToken({ name: "Identifier", pattern: /[a-zA-Z0-9_/s]+/ })
 };
 
-const GSC_TOKENS = [];
-Object.values(GSC_TOKENS_OBJ).forEach((value) => {
-    GSC_TOKENS.push(value);
-});
-
-export const GSC_LEXER = new Lexer(GSC_TOKENS);
-export default GSC_TOKENS;
+export const lexer = new Lexer(Object.values(tokens));

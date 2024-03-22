@@ -1,8 +1,8 @@
-import GSC_PARSER from "./parser.mjs";
+import Parser from "./parser.mjs";
 
-const parser = new GSC_PARSER([], { outputCst: true });
-const visitor = parser.getBaseCstVisitorConstructor();
-class CustomVisitor extends visitor {
+const parser = new Parser([], { outputCst: true });
+const BaseVisitor = parser.getBaseCstVisitorConstructor();
+class CustomVisitor extends BaseVisitor {
     constructor() {
         super();
         this.validateVisitor();
@@ -82,5 +82,5 @@ class CustomVisitor extends visitor {
     }
 
 }
-const GSC_VISITOR = new CustomVisitor();
-export default GSC_VISITOR;
+
+export const visitor = new CustomVisitor();

@@ -1,9 +1,9 @@
 import { CstParser } from "chevrotain";
-import GSC_TOKENS, { GSC_TOKENS_OBJ } from "./tokens.mjs";
+import { tokens } from "./tokens.mjs";
 
-export default class GSC_PARSER extends CstParser {
+export default class Parser extends CstParser {
     constructor() {
-        super(GSC_TOKENS);
+        super(Object.values(tokens));
 
         this.RULE("File", () => {
             this.MANY1(() => {
@@ -15,21 +15,21 @@ export default class GSC_PARSER extends CstParser {
         });
 
         this.RULE("IncludeStatement", () => {
-            this.CONSUME(GSC_TOKENS_OBJ.include);
+            this.CONSUME(tokens.include);
             this.OR([
-                { ALT: () => { this.CONSUME(GSC_TOKENS_OBJ.file_path) } },
-                { ALT: () => { this.CONSUME(GSC_TOKENS_OBJ.external_function_pointer) } }
+                { ALT: () => { this.CONSUME(tokens.file_path) } },
+                { ALT: () => { this.CONSUME(tokens.external_function_pointer) } }
             ]);
-            this.CONSUME(GSC_TOKENS_OBJ.terminator);
+            this.CONSUME(tokens.terminator);
         });
 
         this.RULE("FunctionDeclaration", () => {
-            this.CONSUME(GSC_TOKENS_OBJ.identifier);
-            this.CONSUME(GSC_TOKENS_OBJ.lparentheses);
-            this.CONSUME(GSC_TOKENS_OBJ.rparentheses);
-            this.CONSUME(GSC_TOKENS_OBJ.lbracket);
+            this.CONSUME(tokens.identifier);
+            this.CONSUME(tokens.lparentheses);
+            this.CONSUME(tokens.rparentheses);
+            this.CONSUME(tokens.lbracket);
             this.SUBRULE(this.BlockStatement);
-            this.CONSUME(GSC_TOKENS_OBJ.rbracket);
+            this.CONSUME(tokens.rbracket);
         });
 
         this.RULE("BlockStatement", () => {
@@ -45,14 +45,14 @@ export default class GSC_PARSER extends CstParser {
         });
 
         this.RULE("FunctionCall", () => {
-            this.CONSUME(GSC_TOKENS_OBJ.identifier);
-            this.CONSUME(GSC_TOKENS_OBJ.lparentheses);
-            this.CONSUME(GSC_TOKENS_OBJ.rparentheses);
-            this.CONSUME(GSC_TOKENS_OBJ.terminator);
+            this.CONSUME(tokens.identifier);
+            this.CONSUME(tokens.lparentheses);
+            this.CONSUME(tokens.rparentheses);
+            this.CONSUME(tokens.terminator);
         });
 
         this.RULE("String", () => {
-            this.CONSUME(GSC_TOKENS_OBJ.string);
+            this.CONSUME(tokens.string);
         });
 
         this.performSelfAnalysis();
